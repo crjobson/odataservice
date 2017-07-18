@@ -102,7 +102,7 @@ sap.ui.define([
 				
 				var url = "/mobileservices/origin/hcpms/CARDS/v1/cardTypes/" + sCardTypeGUID + "/cardInstances";
 				var bodyJson = {
-				  "resourceIdentifier": "/V2/Northwind/Northwind.svc" + sPath + "?$expand=Products"
+				  "resourceIdentifiers": [{"uri": "/V2/Northwind/Northwind.svc" + sPath + "?$expand=Products"}]
 				};
 				
 				jQuery.ajax({
