@@ -1,0 +1,70 @@
+<mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:footerbar="sap.ushell.ui.footerbar" controllerName="com.sap.mobile.platform.cards.controller.Detail">
+
+	<semantic:DetailPage id="page" navButtonPress="onNavBack" showNavButton="{device>/system/phone}" title="{i18n>detailTitle}" busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
+
+		<semantic:content><ObjectHeader id="objectHeader" title="{CompanyName}">
+			<attributes>
+			    <ObjectAttribute text="{ContactName}" active="false" id="__attribute42"/>
+			    <ObjectAttribute text="{ContactTitle}" active="false" id="__attribute55"/>
+			</attributes>
+			</ObjectHeader>
+			<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
+				<items>
+					<IconTabFilter id="iconTabBarFilter1" icon="sap-icon://hint" tooltip="{i18n>detailIconTabBarInfo}">
+					<content>
+					    <sap.ui.layout:VerticalLayout width="100%" xmlns:sap.ui.layout="sap.ui.layout" id="__layout0">
+					        <sap.ui.layout:content>
+					            <Text text="{Address}" maxLines="0" id="__text77"/>
+					            <Text text="{City}" maxLines="0" id="__text79"/><Text text="{PostalCode}" maxLines="0" id="__text78"/>
+					        </sap.ui.layout:content>
+					    </sap.ui.layout:VerticalLayout>
+					    <Text text="{Phone}" maxLines="0" id="__text80"/>
+					</content>
+					</IconTabFilter>
+					<IconTabFilter id="iconTabBarFilter2" icon="sap-icon://attachment" tooltip="{i18n>detailIconTabBarAttachments}">
+						<Table id="lineItemsList" width="auto" items="{Products}" updateFinished="onListUpdateFinished" noDataText="{i18n>detailLineItemTableNoDataText}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin">
+							<headerToolbar>
+								<Toolbar id="lineItemsToolbar">
+									<Title id="lineItemsHeader" text="{detailView>/lineItemListTitle}"/>
+								</Toolbar>
+							</headerToolbar>
+							<columns>
+								<Column>
+									<Text text="{i18n>detailLineItemTableIDColumn}"/>
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Right">
+									<Text text="{i18n>detailLineItemTableUnitNumberColumn}"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<ObjectIdentifier title="{ProductName}" text="{ProductName}"/>
+										<ObjectNumber number="{UnitPrice}" unit="USD"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</semantic:content>
+
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
+		</semantic:sendEmailAction>
+
+		<semantic:shareInJamAction>
+			<semantic:ShareInJamAction id="shareInJam" visible="{FLP>/isShareInJamActive}" press="onShareInJamPress"/>
+		</semantic:shareInJamAction>
+
+		<semantic:saveAsTileAction>
+			<footerbar:AddBookmarkButton id="shareTile" title="{detailView>/saveAsTileTitle}"/>
+		</semantic:saveAsTileAction>
+
+		<semantic:customFooterContent>
+			<Button text="Share to C2G" press="onShareToC2GPress"/>
+		</semantic:customFooterContent>
+	</semantic:DetailPage>
+
+</mvc:View>
